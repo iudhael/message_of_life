@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Recherche
+{% endblock %}
+
+{% block content %}
+
+{% include 'blog/search_form_post.html' %}
+{% if posts|length_is:"0" %}
+  <div class="text-center">
+      Palsambleu ! Nous n'avons trouvé aucun résultat à cette requête. Même pas de quoi se ronger la chique !
+      Partez de nouveau à l'abordage !
+  </div>
+{% else %}
+  <div class="my-5">
+    <div class="container text-center">
+        
+      <h4 class="mb-5"><strong>Les posts recents</strong></h4>
+      <!-- first post -->
+      <div class="row col-md-12 mx-auto mb-4 ">
+        {% for post in posts %}  
+
+          <div class="card shadow my-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-thumbnail border-0" src="{{ post.image.url }}" alt="img">
+                    </div>
+                    <div class="col-md-8">
+                        <h5 class="card-title">{{ post.title }} </h5>
+                        <small>{{ post.date_added}}</small>
+                        <hr>
+                        <p class="text-justify my-3">
+                          {{ post.intro }}
+                        </p>
+                        <div class="d-flex justify-content-end">
+                          <a href="detail/{{ post.slug }}" class="btn btn-primary">lire plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+        {% endfor %} 
+
+
+
+          {% if paginate %} <!--empecher la barre de navigation d'apparaitre si la pagination n'est pas activer-->
+
+              <div class="clearfix"></div>
+              <nav class="mt-5 mb-5 text-center container" aria-label="...">
+                  <div class="pager d-flex justify-content-around">
+                      {% if posts.has_previous %}
+                          <a class="" href="?page={{ posts.previous_page_number }}#ermopastry">
+                              <button class="btn btn-warning">
+                                  Précédent
+                              </button>
+                          </a>
+                      {% endif %}
+
+                      {% if posts.has_next %}
+                          <a href="?page={{ posts.next_page_number }}#ermopastry">
+                              <button class="btn btn-warning">
+                                  Suivant
+                              </button>
+                          </a>
+                      {% endif %}
+                  </div>
+              </nav>
+
+          {% endif %}
+
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
+{% endblock %}

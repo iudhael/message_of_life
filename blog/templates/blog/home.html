@@ -1,0 +1,122 @@
+{%extends 'base.html'%}
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block content %} 
+
+  {% include 'blog/search_form_post.html' %}
+  {% if posts|length_is:"0" %}
+    <div class="text-center">
+        Palsambleu ! Nous n'avons trouvé aucun résultat à cette requête. Même pas de quoi se ronger la chique !
+        Partez de nouveau à l'abordage !
+    </div>
+  {% else %}
+    <div class="my-5">
+      <div class="container text-center">
+          
+        <h4 class="mb-5"><strong>Messages</strong></h4>
+        <!-- first post -->
+        <div class="row d-flex align-items-center mb-4 ">
+          {% for post in posts %}  
+          <div class="col-md-6  mx-auto mb-4 ">
+            <div class="card shadow my-3">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="row col-md-12 mx-auto ">
+                        <div class="col-md-6 ">
+                            <img class="img-thumbnail border-0" src="{{ post.image.url }}" alt="img">
+                        </div>
+                        <div class="col-md-6 ">
+                            <h5 class="card-title">{{ post.title }} </h5>
+                            <small>{{ post.date_added}}</small>
+                            <hr>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                          <p class="text-justify my-3">
+                            {{ post.intro }}
+                          </p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex">
+                              <div class="mr-2">
+                                <h5>{{ post.favori_count }}</h5>
+                              </div>
+                              {% if user.is_authenticated %}
+                                  {% if request.user in post.favourites.all %}
+                                                              
+                                    <div>
+                                      <a href="{% url 'blog:favourite_add' post.id %}">
+                                    
+                                        <i class="fa-solid fa-heart h4 text-danger"></i>
+                                      </a>
+                                    </div>
+                                    
+                                  {% else %}
+                                      <a href="{% url 'blog:favourite_add' post.id %}">
+                                          <i class="fa-solid fa-heart h4 text-dark"></i>
+                                      </a>
+                                  {% endif %}
+                              {% else %}
+                                  <a href="{% url 'authentification:register' %}">
+                                      <i class="fa-solid fa-heart h4 text-dark"></i>
+                                  </a>
+                              {% endif %}
+                            </div>
+  
+                            <div>
+                              
+                                <small>{{ post.comment_count }}</small>
+                                <a href="{% url 'blog:detailView' post.slug %}#comment ">
+
+                                  <i class="fa-solid fa-comment-dots h4 text-dark"></i>
+                                </a>
+                              
+                            </div>
+                            <div class="">
+                              
+                              <a href="{% url 'blog:detailView' post.slug %}" class="btn btn-primary">lire plus</a>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %} 
+
+
+
+            {% if paginate %} <!--empecher la barre de navigation d'apparaitre si la pagination n'est pas activer-->
+
+                <div class="clearfix"></div>
+                <nav class="mt-5 mb-5 text-center container" aria-label="...">
+                    <div class="pager d-flex justify-content-around">
+                        {% if posts.has_previous %}
+                            <a class="" href="?page={{ posts.previous_page_number }}">
+                                <button class="btn btn-warning">
+                                    Précédent
+                                </button>
+                            </a>
+                        {% endif %}
+
+                        {% if posts.has_next %}
+                            <a href="?page={{ posts.next_page_number }}">
+                                <button class="btn btn-warning">
+                                    Suivant
+                                </button>
+                            </a>
+                        {% endif %}
+                    </div>
+                </nav>
+
+            {% endif %}
+
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+
+{% endblock %} 

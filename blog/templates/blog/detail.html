@@ -1,0 +1,137 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% load social_share %}
+{% block title %}
+    Detail
+{% endblock %}
+
+
+{% block content %} 
+    <div class="bg-dark p-3 mb-5 partage_icon fixed-bottom" >
+        <i class="fa-sharp fa-solid fa-share-nodes h2 text-white "  title="Share with me !!!" data-bs-toggle="modal" data-bs-target="#share"></i>
+    </div >
+
+    <div class="col-md-8 mx-auto mt-5 text-center">
+        <div class="pt-5" >
+            <div class="card border-0">
+
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img src="{{ article.image.url }}"  class="img-fluid" />
+                </div>
+
+                <div class="card-title">
+                    <h1>{{ article.title }}</h1>
+                    <div><small> {{ article.date_added }} </small></div>
+                    <strong>{{ article.intro }}</strong>
+                </div>
+
+                <div class="card-body">
+                    {% for paragraphe in paragraphes %}
+                        <p style="color:rgb(42, 51, 42); text-align: justify; font-family: Arial, Helvetica, sans-serif;" class="card-text">
+                            {{ paragraphe.body }}
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    
+    <hr>
+    </div>
+    <div>
+        <h3 class="text-center" id="comment">Commentaires</h3>
+            <div class="container">
+                <div class="row mt-5 pt-3 " >
+                    <div class="col-md-4">
+                        <div class="card my-3 shadow bg-dark border-0">
+                            <div class="card-body">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <input class="btn btn-primary btn-block" type="submit" value="Commenter">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8" >
+                        {% if not comments|length_is:"0"%}
+                            {% for comment in comments %}
+                                <div class="card shadow my-3 ">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4 ">
+                                                <img class="img-thumbnail border-0" src="{{ user.profile.profile_pic.url }}" alt="img">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h3>{{ comment.user }}</h3>
+                                                        
+                                                    </div>
+                                                    <div>
+                                                        
+                                                        <small>{{ comment.date_added }}</small>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                
+                                                <p class="text-justify my-3">
+                                                    {{ comment.body }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                        <h4>Pas de commentaire</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+
+
+    <div class="modal fade" id="share" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="share" aria-hidden="true">
+        <div class="modal-dialog modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                    </button>
+                </div>
+                <div class="modal-body bg-dark d-flex justify-content-around">
+                    <div>
+                        {% post_to_whatsapp object_or_url "<i class='fa-brands fa-whatsapp h2 text-white'></i>" %}
+                    </div>
+
+                    <div>
+                        {% post_to_facebook  object_or_url "<i class='fa-brands fa-facebook-f h2 text-white'></i>" %}
+                    </div>
+
+                    <div>
+                        {% post_to_twitter "New message of life !!! Check it out!" object_or_url "<i class='fa-brands fa-twitter h2 text-white'></i>" %}
+
+                    </div>
+
+                    <div>
+                        {% post_to_linkedin  object_or_url  %}
+                    </div>
+
+                    <div >
+                        {% post_to_telegram "New message of life !!! Check it out!" object_or_url "<i class='fa-brands fa-telegram h2 text-white'></i>" %}
+                    </div>
+
+                    <div>
+                        {% send_email object.title  "New message of life !!! Check it out!" object_or_url "<i class='fa-solid fa-envelope h2 text-white'></i>" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
