@@ -1,0 +1,14 @@
+{% autoescape off %}
+
+Welcome to Message Of Life login system
+
+Hello {{ name }}
+
+Thank for chosing our website.
+
+Please confirm your email by clicking on the link below
+
+confirm link : https://{{domain}}{% url 'authentification:activate' uidb64=uid token=token %}
+
+thanks !
+{% endautoescape %}

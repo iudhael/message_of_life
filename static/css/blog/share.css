@@ -1,0 +1,10 @@
+.partage_icon{
+    width: 60px;
+    height: 60px;
+    margin-right: auto;
+    _position: fixed;
+    border-radius: 20px 0px 20px 0px;
+    margin-left: 8px;
+    padding: 2px;
+
+}

@@ -1,0 +1,24 @@
+.content-section {
+  padding: 10px 15px;
+  border: 2px solid #dddddd;
+  border-radius: 0px 90px 90px 0px;
+  margin-bottom: 70px;
+  margin-top: 30px;
+
+}
+
+.account-img {
+  height: 190px; width: 190px;
+ 
+}
+
+.account-heading {
+  font-size: 1.4rem;
+  margin-top: 20px ;
+
+}
+.text-secondary{
+  font-size: 1.1rem;
+}
+
+

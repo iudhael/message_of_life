@@ -1,0 +1,7 @@
+.pointeur{
+    cursor: pointer;
+    transition: all;
+}
+.pointeur:hover{
+    transform: scale(1.2);
+}

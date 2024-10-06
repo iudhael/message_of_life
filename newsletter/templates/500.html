@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    500
+{% endblock %}
+
+
+{% block content %}
+    <div class='container alert alert-danger' >
+        <div class='text-center'>
+            
+            <p><em>Oops ! I did it again.</em></p>
+            <p>Une erreur s'est produite au niveau de notre server. Nous investiguons actuellement sur les causes du drame.</p>                      
+             
+            <a href="{% url 'blog:home' %}">
+                <button class="btn btn-primary">Home</button>
+            </a>
+        </div>
+    </div>
+    
+{% endblock %}

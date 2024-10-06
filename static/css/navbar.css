@@ -1,0 +1,99 @@
+/* navbar */
+
+_header{
+    background-image: url("/static/img/fond.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+
+    padding-bottom: 50px;
+    
+}
+
+header nav {
+
+    font-weight: 700;
+
+}
+
+.rounded-login{
+    width: 90px;
+
+    border: 2px white solid;
+    border-radius: 50px 0px 0px 50px;
+    
+}
+
+.rounded-sigin{
+    width: 90px;
+
+    _background-color: #FE451E;
+    border-radius: 0px 50px 50px 0px;
+    
+    margin-left: 3px;
+}
+
+
+
+
+
+
+
+.active{
+
+    text-decoration: underline 3px #FE451E;
+    text-underline-offset: 0.3rem;
+
+}
+
+
+
+
+
+
+/* end navbar */
+
+
+
+
+
+
+
+
+/* footer */
+
+_footer{
+  
+    height: 100px;
+}
+
+_.border-top-footer1{
+    border-top: 3px #8C8C8C solid;
+}
+
+_.border-top-footer2{
+    border-top: 3px #c2c1c1 solid;
+}
+
+
+_.icon{
+    width:30px;
+	
+}
+
+
+
+
+@media (max-width: 768px) {
+    .partenaire-bloc{
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+/*end footer */

@@ -1,0 +1,70 @@
+{% load static %}
+
+<header>
+    <nav class="navbar navbar-expand-lg  pt-4 pb-4 bg-dark" >
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Message of Life</a>
+
+            <button class="navbar-toggler navbar-light bg-white" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+                <ul class="navbar-nav m-auto ">
+                    <li class="nav-item {% if  navbar == 'blog' %} active {% endif %}">
+                        <a class="nav-link text-white" href="{% url 'blog:home' %}">Messages </a>
+                    </li>
+
+
+                    <li class="nav-item {% if  navbar == 'about' %} active {% endif %}">
+                        <a class="nav-link text-white" href="{% url 'blog:about' %}">About us </a>
+                    </li>
+
+
+                </ul>
+
+                <ul class="navbar-nav ">
+                    <div class="d-flex">
+                        {% if  not user.is_authenticated %}
+                            <li class="nav-item rounded-login text-center {% if  navbar == 'login' %} active {% endif %} ">
+
+                                <a class="nav-link text-white  " href="{% url 'authentification:login' %}">Log in </a>
+
+                            </li>
+
+                            <li class="nav-item rounded-sigin  text-center {% if  navbar == 'register' %} active {% endif %}">
+
+                                <a class="nav-link text-white  " href="{% url 'authentification:register' %}">Sign up </a>
+
+                            </li>
+                        {% else %}
+                        
+                            <li class="nav-item {% if  navbar == 'favoris' %} active {% endif %} mr-2">
+                                <a class="nav-link text-white " href="{% url 'blog:favourite_list' %}">
+                                <i class="fa-solid fa-heart  text-white"></i>
+                                Favoris
+                                </a>
+                            </li>
+                            <li class="nav-item {% if  navbar == 'profile' %} active {% endif %} mr-2">
+                                <a class="nav-link text-white " href="{% url 'authentification:profile' %}#profile">
+                                <i class="fa-solid fa-user text-white"></i>
+                                {{ user.username }}
+                                </a>
+                            </li>
+                            <li class="nav-item "><a class="nav-link text-white" href="{% url 'authentification:logout' %} mr-2">
+                                <i class="fa-solid fa-power-off text-white"></i>
+                                LogOut
+                                </a>
+                            </li>
+                        {% endif %}
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+</header>
+

@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+NEWSLETTER : Message Of Life
+
+{{ texte }}
+
+
+
+unsubscriber link : https://{{domain}}{% url 'newsletter:unsubscribe-letter' %}
+
+thanks !
+{% endautoescape %}
