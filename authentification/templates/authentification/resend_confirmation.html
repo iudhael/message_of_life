@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Confirmation email
+{% endblock %}
+
+
+{% block content %}
+<div id="login">
+
+</div>
+
+<div class="mask mb-5 mt-5 d-flex align-items-centerbg-dark h-100 gradient-custom-3">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card bg-dark" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+                        <form method="POST" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                <legend class="border-bottom mb-4 text-white card-header text-center text-uppercase">Resend confirmation email</legend>
+                                    <div class="row text-white">
+
+                                        {{ form.email|as_crispy_field }}
+
+                                    </div>
+                            </fieldset>
+                            <div class="form-group mt-4">
+                                <button class="btn  btn-success" type="submit">Send email</button>
+
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+        
+
+   
+{% endblock %}

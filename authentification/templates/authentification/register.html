@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    signUp
+{% endblock %}
+
+
+
+{% block content %}
+<div  class="" id="register">
+
+</div>
+
+
+
+<div class="mask mb-5 mt-5 d-flex align-items-centerbg-dark h-100 gradient-custom-3">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card bg-dark" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+
+                        <form method="POST" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <fieldset class="form_group">
+                                <legend class="border-bottom mb-4 text-white card-header text-center text-uppercase ">Register</legend>
+                                    <div class="row">
+        
+                                        <div class="col-12 text-white">
+                                            {{ form.username|as_crispy_field }}
+        
+                                        </div>
+                                        <div class="col-12 text-white">
+                                            {{ form.email|as_crispy_field }}
+        
+                                        </div>
+                                        <div class="col-12 text-white">
+                                            <div >
+                                                {{ form.password1|as_crispy_field }}
+        
+                                            </div>
+                                        </div>
+        
+                                        <div class="col-12 text-white ">
+                                            <div >
+                                                {{ form.password2|as_crispy_field }}
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                            </fieldset>
+                            <div class="form-group text-center">
+                                <button class="btn  btn-success" type="submit">Sign Up</button>
+        
+                            </div>
+        
+                        </form>
+
+                        <div class="text-white mt-4 mb-2 d-flex justify-content-between ">
+                            <div class="text-white mt-4 mb-2 ">
+                                Vous avez  un compte ! <a class="btn btn-primary" href="{% url 'authentification:login' %}#login">Login</a>
+                            </div>
+                            <!--{% if  not email_envoyer %}-->
+                                <div class="mt-4 mb-2">
+                                    <a href="{% url 'authentification:resend-confirmation-email' %}">
+                                        <button class="btn  btn-warning">Resend email</button>
+                                    </a>
+                                </div>
+                            <!--{% endif %}-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+   
+
+        
+{% endblock %}
