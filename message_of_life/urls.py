@@ -33,7 +33,7 @@ sitemaps = {
 
 urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path("message-of-life-admin/admin-panel/", admin.site.urls),
+    path("admin/", admin.site.urls),
     path('', views.ListView, name="home"),
 
     path('', include('blog.urls', namespace='blog')),
